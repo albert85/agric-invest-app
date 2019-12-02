@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
+import Layout from '../../components/Layout';
 
-export default class Trades extends Component {
+export default class Investments extends Component {
+  openDrawer = () => {
+    return this.props.navigation.openDrawer();
+  };
   render() {
     return (
-      <View>
-        <Text>Trades</Text>
-      </View>
+      <Layout title="Trades" {...this.props}>
+        <Text> This is Trades </Text>
+      </Layout>
     );
   }
 }

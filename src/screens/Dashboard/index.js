@@ -7,113 +7,97 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import {Text, View} from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import Layout from '../../components/Layout';
+import style from './style';
+import Card from '../../components/Card';
 
 class App extends React.Component {
-  static navigationOptions = {
-    header: null,
+  openDrawer = () => {
+    return this.props.navigation.openDrawer();
+  };
+
+  getCardDetails = cardTitle => {
+    switch (cardTitle) {
+      case 'Total Wallet':
+        return {
+          cardBorderColor: 'blueColor',
+          textBorderColor: 'blueText',
+          circleColor: 'roundCircleBlue',
+        };
+      case 'On-going Investment':
+        return {
+          cardBorderColor: 'orangeColor',
+          textBorderColor: 'orangeText',
+          circleColor: 'roundCircleOrange',
+        };
+      case 'Commission':
+        return {
+          cardBorderColor: 'greenColor',
+          textBorderColor: 'greenText',
+          circleColor: 'roundCircleGreen',
+        };
+      case 'Investment Wallet':
+        return {
+          cardBorderColor: 'greenColor',
+          textBorderColor: 'greenText',
+          circleColor: 'roundCircleGreen',
+        };
+      case 'Cash-Out Investment':
+        return {
+          cardBorderColor: 'greenColor',
+          textBorderColor: 'greenText',
+          circleColor: 'roundCircleGreen',
+        };
+      case 'Trade Investment':
+        return {
+          cardBorderColor: 'blueColor',
+          textBorderColor: 'blueText',
+          circleColor: 'roundCircleBlue',
+        };
+      case 'Mature Investment':
+        return {
+          cardBorderColor: 'greenColor',
+          textBorderColor: 'greenText',
+          circleColor: 'roundCircleGreen',
+        };
+      default:
+        return {
+          cardBorderColor: 'redColor',
+          textBorderColor: 'redText',
+          circleColor: 'roundCircleRed',
+        };
+    }
   };
   render() {
+    const cardTitle = [
+      'Total Wallet',
+      'Investment Wallet',
+      'Trade Investment',
+      'Mature Investment',
+      'Cash-Out Investment',
+      'On-going Investment',
+      'Cancelled Investment',
+      'Commission',
+    ];
     return (
-      <View>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={styles.scrollView}>
-            <Header />
-            {global.HermesInternal == null ? null : (
-              <View style={styles.engine}>
-                <Text style={styles.footer}>Engine: Hermes</Text>
-              </View>
-            )}
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Step One</Text>
-                <Text style={styles.sectionDescription}>
-                  Edit <Text style={styles.highlight}>App.js</Text> to change
-                  this screen and then come back to see your edits.
-                </Text>
-              </View>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>See Your Changes</Text>
-                <Text style={styles.sectionDescription}>
-                  <ReloadInstructions />
-                </Text>
-              </View>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Debug</Text>
-                <Text style={styles.sectionDescription}>
-                  <DebugInstructions />
-                </Text>
-              </View>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Learn More</Text>
-                <Text style={styles.sectionDescription}>
-                  Read the docs to discover what to do next:
-                </Text>
-              </View>
-              <LearnMoreLinks />
-            </View>
-          </ScrollView>
-        </SafeAreaView>
-      </View>
+      <Layout title="AGRICTRADEVEST" {...this.props} style={style.container}>
+        {cardTitle.map((card, index) => {
+          console.log('son', this.getCardDetails(card.cardBorderColor));
+          return (
+            <Card
+              key={index}
+              cardBorderColor={`${this.getCardDetails(card).cardBorderColor}`}
+              textBorderColor={`${this.getCardDetails(card).textBorderColor}`}
+              circleColor={`${this.getCardDetails(card).circleColor}`}
+              cardTitle={card}
+            />
+          );
+        })}
+      </Layout>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
 
 export default App;

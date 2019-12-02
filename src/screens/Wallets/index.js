@@ -8,8 +8,8 @@ export default class Investments extends Component {
   };
   render() {
     return (
-      <Layout title="Investments" {...this.props}>
-        <Text> This is Investments page </Text>
+      <Layout title="Wallets" {...this.props}>
+        <Text> This is Wallets page </Text>
       </Layout>
     );
   }
